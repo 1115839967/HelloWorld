@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -16,12 +17,14 @@ public class ListDemo {
         b.add("a");
         b.add("b");
 
+        forEeachList();
+
         /*for (int i = 0; i < a.size(); i++) {
             a.remove(1);
 
             System.out.println(a.get(i));
         }*/
-        listForEach();
+//        listForEach();
 
 
         //System.out.println(a.equals(Double.parseDouble(c)));
@@ -44,5 +47,44 @@ public class ListDemo {
 
         Map<String, User> collect = userList.stream().collect(Collectors.toMap(User::getName, Function.identity(), (user1, user2) -> user1));
         System.out.println(userList.subList(0, 3));
+    }
+
+    private static void forEeachList() {
+        List<String> idList = new ArrayList<>();
+        idList.add("1");
+        idList.add("2");
+        idList.add("3");
+        idList.add("4");
+        idList.add("5");
+        idList.add("6");
+        idList.add("7");
+        idList.add("8");
+        idList.add("9");
+        idList.add("10");
+        idList.add("11");
+        idList.add("12");
+        idList.add("13");
+        idList.add("14");
+
+
+        //单线程遍历
+        idList.forEach(id -> {
+            System.out.println(id + " 方法1，线程：" + Thread.currentThread().getId());
+        });
+        System.out.println("-----------------------------------------------------");
+
+        //单线程遍历
+        idList.stream().forEach(id -> {
+            System.out.println(id + " 方法2，线程：" + Thread.currentThread().getId());
+        });
+        System.out.println("-----------------------------------------------------");
+
+        //多线程遍历
+        idList.parallelStream().forEach(id -> {
+            System.out.println(id + " 方法3，线程：" + Thread.currentThread().getId());
+        });
+        System.out.println("-----------------------------------------------------");
+
+
     }
 }
