@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -64,26 +61,39 @@ public class ListDemo {
         idList.add("11");
         idList.add("12");
         idList.add("13");
-        idList.add("14");
+        idList.add("15");
+        idList.add("16");
+        idList.add("17");
+        idList.add("18");
+        idList.add("19");
+        idList.add("20");
 
 
         //单线程遍历
+        long start1 = System.currentTimeMillis();
         idList.forEach(id -> {
             System.out.println(id + " 方法1，线程：" + Thread.currentThread().getId());
         });
-        System.out.println("-----------------------------------------------------");
+        long end1 = System.currentTimeMillis();
+
+        System.out.println("------------------------" + (end1 - start1) + "ms -----------------------------");
 
         //单线程遍历
+        long start2 = System.currentTimeMillis();
         idList.stream().forEach(id -> {
             System.out.println(id + " 方法2，线程：" + Thread.currentThread().getId());
         });
-        System.out.println("-----------------------------------------------------");
+        long end2 = System.currentTimeMillis();
+        System.out.println("-------------------------" + (end2 - start2) + "ms ----------------------------");
 
         //多线程遍历
+        long start3 = System.currentTimeMillis();
+        List<String> synchronizedIdList = Collections.synchronizedList(idList);
         idList.parallelStream().forEach(id -> {
             System.out.println(id + " 方法3，线程：" + Thread.currentThread().getId());
         });
-        System.out.println("-----------------------------------------------------");
+        long end3 = System.currentTimeMillis();
+        System.out.println("-------------------------"+ (end3 - start3) + "ms ------------------------------");
 
 
     }
